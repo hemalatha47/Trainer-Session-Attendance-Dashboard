@@ -1,0 +1,2 @@
+import{c as e}from"./index-CAlCWOeC.js";const t=[["path",{d:"M8 2v4",key:"1cmpym"}],["path",{d:"M16 2v4",key:"4m81vk"}],["rect",{width:"18",height:"18",x:"3",y:"4",rx:"2",key:"1hopcy"}],["path",{d:"M3 10h18",key:"8toen8"}],["path",{d:"m14 14-4 4",key:"rymu2i"}],["path",{d:"m10 14 4 4",key:"3sz06r"}]],n=e("calendar-x",t);const o=[["path",{d:"m15 18-6-6 6-6",key:"1wnfg3"}]],a=e("chevron-left",o);const h=[["path",{d:"m9 18 6-6-6-6",key:"mthhwq"}]],r=e("chevron-right",h);export{n as C,r as a,a as b};
+//# sourceMappingURL=chevron-right-B_WOfokm.js.map
