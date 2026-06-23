@@ -1,0 +1,2 @@
+import{i as u,r}from"./index-D5xUM_Ac.js";const n=()=>{const{showToast:o,dismissToast:c}=u(),s=r.useCallback((a,e="success",t={})=>o(a,e,t),[o]);return{success:r.useCallback((a,e)=>s(a,"success",e),[s]),error:r.useCallback((a,e)=>s(a,"error",e),[s]),warning:r.useCallback((a,e)=>s(a,"warning",e),[s]),info:r.useCallback((a,e)=>s(a,"info",e),[s]),neutral:r.useCallback((a,e)=>s(a,"neutral",e),[s]),show:s,dismiss:c}};export{n as u};
+//# sourceMappingURL=useToast-C8VnX079.js.map

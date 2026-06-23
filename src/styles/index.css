@@ -1,0 +1,134 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/**
+ * Global style foundation (Phase 3, Module 3.1, Task 12).
+ * Standardizes body defaults, scrollbars, selection color, focus rings,
+ * and base transitions consumed across the app.
+ */
+
+@layer base {
+  html, body, #root {
+    height: 100%;
+  }
+
+  body {
+    @apply bg-background text-textPrimary font-sans antialiased;
+  }
+
+  /* Selection color — accent-tinted, matches brand */
+  ::selection {
+    @apply bg-accent-100 text-accent-900;
+  }
+
+  /* Default focus ring for any element relying on :focus-visible
+     (component-level overrides should match this) */
+  :focus-visible {
+    outline: 2px solid theme('colors.accent.600');
+    outline-offset: 2px;
+  }
+
+  /* Reduced motion: disable non-essential animations/transitions */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer utilities {
+  /* Hide scrollbars while preserving scroll (e.g. horizontal tab strips) */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Thin, theme-colored scrollbar for content areas (tables, sidebars) */
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: theme('colors.border') transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: theme('colors.border');
+    border-radius: theme('borderRadius.full');
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background-color: theme('colors.secondary.400');
+  }
+
+  /* Standard interactive transition — color/shadow/transform only */
+  .transition-base {
+    transition-property: color, background-color, border-color, box-shadow, transform, opacity;
+    transition-duration: 200ms;
+    transition-timing-function: ease-out;
+  }
+
+  /* ── Overlay infrastructure (Module 3.6) ──────────────────────────────
+   * Semantic class names for Overlay and Portal components.
+   * z-index values are managed in JS (OVERLAY_Z) and applied via inline
+   * style — these classes handle positioning and visual treatment only.
+   * ------------------------------------------------------------------ */
+
+  /**
+   * Dim backdrop — full-screen fixed layer behind overlay content.
+   * Uses a semi-transparent neutral to provide visual separation without
+   * obscuring context entirely. Matches blueprint's professional aesthetic.
+   */
+  .overlay-backdrop {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(15, 23, 42, 0.5); /* slate-900 at 50% */
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+  }
+
+  /**
+   * Transparent backdrop — provides click-outside detection without the
+   * dim effect. Used for dropdowns, popovers, tooltips.
+   */
+  .overlay-backdrop--transparent {
+    position: fixed;
+    inset: 0;
+    background-color: transparent;
+  }
+
+  /**
+   * Content wrapper — full-screen fixed layer that sits directly above
+   * the backdrop and contains the overlay panel (modal panel, drawer, etc).
+   * Individual panels control their own layout (centering, side-anchoring).
+   * pointer-events: none on the wrapper lets backdrop clicks fall through
+   * correctly; re-enabled on the panel itself via the consuming component.
+   */
+  .overlay-content-wrapper {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none; /* panels set pointer-events: auto on themselves */
+    overflow: hidden;
+  }
+
+  /**
+   * Ensure the shared overlay root (#overlay-root) never interferes
+   * with normal page layout. It is a zero-size sibling of #root.
+   */
+  #overlay-root {
+    position: relative;
+    z-index: 0;
+  }
+}
