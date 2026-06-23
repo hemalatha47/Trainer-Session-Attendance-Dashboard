@@ -98,7 +98,11 @@ const LoginPage = () => {
                 <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
               </svg>
             </div>
+<<<<<<< HEAD
             <h1 className="text-xl font-semibold text-textPrimary text-center">
+=======
+            <h1 className="text-xl font-semibold text-primary text-center">
+>>>>>>> 83da42ba2764e152fa78cf9b177f8d106d2a9726
               Trainer Session Attendance Dashboard
             </h1>
             <p className="site-name text-sm font-medium text-accent mt-0.5 text-center tracking-wide">

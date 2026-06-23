@@ -1,0 +1,4 @@
+import{j as e,L as t,R as s}from"./index-CAlCWOeC.js";const o=()=>e.jsx("div",{className:"min-h-screen flex items-center justify-center bg-background p-4",role:"main","aria-label":"Page not found",children:e.jsxs("div",{className:"text-center max-w-sm",children:[e.jsx("p",{className:"text-5xl font-bold text-primary mb-2",children:"404"}),e.jsx("h1",{className:"text-lg font-semibold text-textPrimary mb-2",children:"Page Not Found"}),e.jsx("p",{className:"text-sm text-textMuted mb-6",children:"The page you're looking for doesn't exist or has been moved."}),e.jsx(t,{to:s.DASHBOARD,className:`inline-block px-4 py-2.5 bg-accent text-white text-sm font-medium
+          rounded-md hover:bg-accent-700 transition-colors focus:outline-none
+          focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2`,children:"Back to Dashboard"})]})});export{o as default};
+//# sourceMappingURL=index-D-pt0rfV.js.map

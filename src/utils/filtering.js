@@ -225,6 +225,7 @@ export const filterByAttendanceCategory = (items, category, threshold = 75) => {
     }
   });
 };
+<<<<<<< HEAD
 
 
 // ── Batch-specific filter utilities (Module 4.4) ──────────────────────────────
@@ -508,3 +509,5 @@ export const applyStudentFilters = (students, filters, deps = {}) => {
     (items) => filterStudentsByJoinedDate(items, filters.joinedFrom, filters.joinedTo),
   ]);
 };
+=======
+>>>>>>> 83da42ba2764e152fa78cf9b177f8d106d2a9726

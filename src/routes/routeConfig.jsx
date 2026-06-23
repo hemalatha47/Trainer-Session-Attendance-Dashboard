@@ -189,6 +189,7 @@ export const ROUTE_CONFIG = [
     futurePermissions:  ['student:write'],
   },
   {
+<<<<<<< HEAD
     path:               ROUTES.STUDENT_DETAIL,
     title:              'Student Details',
     breadcrumb:         ['Students', 'Student Details'],
@@ -217,6 +218,8 @@ export const ROUTE_CONFIG = [
     futurePermissions:  ['attendance:write'],
   },
   {
+=======
+>>>>>>> 83da42ba2764e152fa78cf9b177f8d106d2a9726
     path:               ROUTES.MARK_ATTENDANCE,
     title:              'Mark Attendance',
     breadcrumb:         ['Attendance', 'Mark Attendance'],
@@ -224,13 +227,18 @@ export const ROUTE_CONFIG = [
     showInSidebar:      true,
     group:              'main',
     sortOrder:          4,
+<<<<<<< HEAD
     description:        'Select batch and date to begin an attendance session',
+=======
+    description:        'Record daily attendance for a batch',
+>>>>>>> 83da42ba2764e152fa78cf9b177f8d106d2a9726
     icon:               icons.attendance,
     exactMatch:         false,
     futureRoles:        ['admin', 'manager', 'trainer'],
     futurePermissions:  ['attendance:write'],
   },
   {
+<<<<<<< HEAD
     path:               ROUTES.ATTENDANCE_HISTORY,
     title:              'Attendance History',
     breadcrumb:         ['Attendance', 'History'],
@@ -250,6 +258,8 @@ export const ROUTE_CONFIG = [
     futurePermissions:  ['attendance:write'],
   },
   {
+=======
+>>>>>>> 83da42ba2764e152fa78cf9b177f8d106d2a9726
     path:               ROUTES.REPORTS,
     title:              'Reports',
     breadcrumb:         ['Reports'],

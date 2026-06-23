@@ -1,5 +1,6 @@
 /**
  * AttendanceSheet.jsx
+<<<<<<< HEAD
  * Attendance entry sheet for a batch + date.
  *
  * Module 6.4 — Bulk Attendance Actions (UPDATED)
@@ -14,10 +15,27 @@
  * Architecture:
  *   - No backend calls. Receives all state as props.
  *   - Parent page (AttendanceSheetPage) owns hook + passes down.
+=======
+ * Attendance entry sheet for a batch + date (Module 3.5, Task 4).
+ *
+ * Architecture only — no backend calls. Receives students + statuses as props.
+ * The parent page (MarkAttendancePage) owns state and calls attendanceService.
+ *
+ * Features:
+ *   - Renders AttendanceRow per student
+ *   - Search filter (client-side)
+ *   - Status filter pill bar
+ *   - Bulk selection + BulkAttendanceToolbar
+ *   - Loading skeleton (TableSkeleton)
+ *   - Empty states (NoStudentsForBatch, AttendanceSearchEmpty)
+ *   - Error state
+ *   - Responsive grid layout
+>>>>>>> 83da42ba2764e152fa78cf9b177f8d106d2a9726
  *
  * @param {object[]} props.students           — [{id, name, studentCode}]
  * @param {object}   props.statuses           — { [studentId]: status }
  * @param {function} props.onStatusChange     — (studentId, newStatus) => void
+<<<<<<< HEAD
  * @param {Set}      [props.selectedIds]      — Set<string> from hook
  * @param {function} [props.onSelectAll]      — () => void
  * @param {function} [props.onClearSelection] — () => void
@@ -28,15 +46,28 @@
  * @param {string}   [props.error]
  * @param {function} [props.onRetry]
  * @param {boolean}  [props.readOnly=false]
+=======
+ * @param {boolean}  [props.loading=false]
+ * @param {string}   [props.error]
+ * @param {function} [props.onRetry]
+ * @param {boolean}  [props.readOnly=false]   — hides toggles; only shows chips
+>>>>>>> 83da42ba2764e152fa78cf9b177f8d106d2a9726
  * @param {object}   [props.remarks]          — { [studentId]: string }
  * @param {function} [props.onRemarksChange]  — (studentId, text) => void
  * @param {string}   [props.className]
  */
 
+<<<<<<< HEAD
 import { useState, useMemo, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, X } from 'lucide-react';
 import { fadeIn } from '@constants/animations';
+=======
+import { useState, useMemo, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Search, X } from 'lucide-react';
+import { fadeIn, TRANSITIONS, usePrefersReducedMotion } from '@constants/animations';
+>>>>>>> 83da42ba2764e152fa78cf9b177f8d106d2a9726
 import { cn } from '@utils/componentUtils';
 import { TableSkeleton } from '@components/feedback/Skeleton';
 import { ErrorState } from '@components/feedback/ErrorState';
@@ -84,6 +115,7 @@ const AttendanceSheet = ({
   students = [],
   statuses = {},
   onStatusChange,
+<<<<<<< HEAD
 
   // ── Module 6.4: selection props lifted from hook ──────────────────────────
   selectedIds            = new Set(),
@@ -94,6 +126,8 @@ const AttendanceSheet = ({
   onMarkSelectedAbsent,
   // ─────────────────────────────────────────────────────────────────────────
 
+=======
+>>>>>>> 83da42ba2764e152fa78cf9b177f8d106d2a9726
   loading = false,
   error,
   onRetry,
@@ -102,6 +136,7 @@ const AttendanceSheet = ({
   onRemarksChange,
   className,
 }) => {
+<<<<<<< HEAD
 
   // ── Local UI state (not lifted — view-only concerns) ──────────────────────
   const [searchQuery,  setSearchQuery]  = useState('');
@@ -109,6 +144,13 @@ const AttendanceSheet = ({
 
   // Select-all checkbox ref for indeterminate state
   const selectAllRef = useRef(null);
+=======
+  const reduced = usePrefersReducedMotion();
+
+  const [searchQuery, setSearchQuery] = useState('');
+  const [statusFilter, setStatusFilter] = useState(null); // null = all
+  const [selectedIds, setSelectedIds] = useState(new Set());
+>>>>>>> 83da42ba2764e152fa78cf9b177f8d106d2a9726
 
   // ── Filtered student list ──────────────────────────────────────────────────
   const filteredStudents = useMemo(() => {
@@ -140,6 +182,7 @@ const AttendanceSheet = ({
     return counts;
   }, [students, statuses]);
 
+<<<<<<< HEAD
   // ── Selection helpers (using hook-lifted selection state) ─────────────────
   const filteredIds     = useMemo(() => filteredStudents.map((s) => s.id), [filteredStudents]);
   const selectedInView  = filteredIds.filter((id) => selectedIds.has(id)).length;
@@ -175,12 +218,41 @@ const AttendanceSheet = ({
   const handleSelectOne = useCallback((studentId, checked) => {
     onToggleRow?.(studentId);
   }, [onToggleRow]);
+=======
+  // ── Bulk selection helpers ─────────────────────────────────────────────────
+  const allFilteredIds = useMemo(() => filteredStudents.map((s) => s.id), [filteredStudents]);
+  const allSelected = allFilteredIds.length > 0 && allFilteredIds.every((id) => selectedIds.has(id));
+  const someSelected = allFilteredIds.some((id) => selectedIds.has(id));
+
+  const handleSelectAll = useCallback((checked) => {
+    setSelectedIds(checked ? new Set(allFilteredIds) : new Set());
+  }, [allFilteredIds]);
+
+  const handleSelectOne = useCallback((studentId, checked) => {
+    setSelectedIds((prev) => {
+      const next = new Set(prev);
+      checked ? next.add(studentId) : next.delete(studentId);
+      return next;
+    });
+  }, []);
+
+  const handleBulkStatus = useCallback((newStatus) => {
+    selectedIds.forEach((id) => onStatusChange?.(id, newStatus));
+    setSelectedIds(new Set());
+  }, [selectedIds, onStatusChange]);
+
+  const handleClearSelection = useCallback(() => setSelectedIds(new Set()), []);
+>>>>>>> 83da42ba2764e152fa78cf9b177f8d106d2a9726
 
   const toggleStatusFilter = useCallback((key) => {
     setStatusFilter((prev) => (prev === key ? null : key));
   }, []);
 
+<<<<<<< HEAD
   // ── States: loading / error / empty ───────────────────────────────────────
+=======
+  // ── States ─────────────────────────────────────────────────────────────────
+>>>>>>> 83da42ba2764e152fa78cf9b177f8d106d2a9726
   if (loading) {
     return (
       <div className={cn('flex flex-col gap-4', className)}>
@@ -204,8 +276,11 @@ const AttendanceSheet = ({
     return <NoStudentsForBatch className={className} />;
   }
 
+<<<<<<< HEAD
   const selectionCount = selectedIds.size;
 
+=======
+>>>>>>> 83da42ba2764e152fa78cf9b177f8d106d2a9726
   return (
     <motion.div
       variants={fadeIn}
@@ -213,8 +288,14 @@ const AttendanceSheet = ({
       animate="animate"
       className={cn('flex flex-col gap-4', className)}
     >
+<<<<<<< HEAD
       {/* ── Search + count row ────────────────────────────────────────────── */}
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+=======
+      {/* ── Toolbar bar ──────────────────────────────────────────────────── */}
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        {/* Search input */}
+>>>>>>> 83da42ba2764e152fa78cf9b177f8d106d2a9726
         <div className="relative flex-1 max-w-xs">
           <Search
             size={14}
@@ -246,6 +327,10 @@ const AttendanceSheet = ({
           )}
         </div>
 
+<<<<<<< HEAD
+=======
+        {/* Student count */}
+>>>>>>> 83da42ba2764e152fa78cf9b177f8d106d2a9726
         <p className="text-xs text-textMuted shrink-0">
           {filteredStudents.length} of {students.length} student{students.length !== 1 ? 's' : ''}
         </p>
@@ -280,6 +365,7 @@ const AttendanceSheet = ({
         </div>
       )}
 
+<<<<<<< HEAD
       {/* ── Bulk select header row ────────────────────────────────────────── */}
       {!readOnly && filteredStudents.length > 0 && (
         <div className="flex items-center gap-3 px-3 py-2 rounded-md bg-neutral-50 border border-border">
@@ -317,6 +403,35 @@ const AttendanceSheet = ({
               onMarkPresent={onMarkSelectedPresent}
               onMarkAbsent={onMarkSelectedAbsent}
               onClear={onClearSelection}
+=======
+      {/* ── Bulk select header ────────────────────────────────────────────── */}
+      {!readOnly && filteredStudents.length > 0 && (
+        <div className="flex items-center gap-3 px-3 py-2 rounded-md bg-neutral-50 border border-border">
+          <input
+            type="checkbox"
+            checked={allSelected}
+            ref={(el) => {
+              if (el) el.indeterminate = someSelected && !allSelected;
+            }}
+            onChange={(e) => handleSelectAll(e.target.checked)}
+            aria-label="Select all students"
+            className="h-4 w-4 rounded border-border text-accent-600 cursor-pointer
+              focus-visible:ring-2 focus-visible:ring-accent-600"
+          />
+          <span className="text-xs font-medium text-textMuted flex-1">
+            {allSelected
+              ? `All ${filteredStudents.length} selected`
+              : someSelected
+                ? `${selectedIds.size} selected`
+                : 'Select all'}
+          </span>
+          {selectedIds.size > 0 && (
+            <BulkAttendanceToolbar
+              selectedCount={selectedIds.size}
+              onMarkPresent={() => handleBulkStatus(ATTENDANCE_STATUS.PRESENT)}
+              onMarkAbsent={() => handleBulkStatus(ATTENDANCE_STATUS.ABSENT)}
+              onClear={handleClearSelection}
+>>>>>>> 83da42ba2764e152fa78cf9b177f8d106d2a9726
               compact
             />
           )}
@@ -332,11 +447,15 @@ const AttendanceSheet = ({
             onClear={() => { setSearchQuery(''); setStatusFilter(null); }}
           />
         ) : (
+<<<<<<< HEAD
           <div
             className="flex flex-col gap-2"
             role="list"
             aria-label="Attendance list"
           >
+=======
+          <div className="flex flex-col gap-2" role="list" aria-label="Attendance list">
+>>>>>>> 83da42ba2764e152fa78cf9b177f8d106d2a9726
             {filteredStudents.map((student) => (
               <div key={student.id} role="listitem">
                 <AttendanceRow

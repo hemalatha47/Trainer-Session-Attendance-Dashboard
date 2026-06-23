@@ -1,4 +1,5 @@
 /**
+<<<<<<< HEAD
  * AnalyticsPage
  * Module 6.7 — Attendance Analytics & Alerts.
  *
@@ -124,5 +125,19 @@ const AnalyticsPage = () => {
     </motion.div>
   );
 };
+=======
+ * AnalyticsPage — Module 2.3 compile-safety stub.
+ * Full line/bar/pie charts and leaderboard arrive in Phase 8.
+ */
+
+const AnalyticsPage = () => (
+  <div>
+    <h2 className="text-lg font-semibold text-primary mb-2">Analytics</h2>
+    <p className="text-sm text-textMuted">
+      Attendance trend charts and leaderboard will appear here.
+    </p>
+  </div>
+);
+>>>>>>> 83da42ba2764e152fa78cf9b177f8d106d2a9726
 
 export default AnalyticsPage;

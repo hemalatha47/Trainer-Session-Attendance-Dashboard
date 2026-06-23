@@ -2,6 +2,7 @@
  * routes.js
  * Centralized route path constants. Single source of truth for all
  * application paths. Section 16.4 — ROUTES.DASHBOARD = '/' (no /dashboard alias).
+<<<<<<< HEAD
  *
  * Updated Module 5.1: Added STUDENT_DETAIL route for /students/:id
  * Updated Module 6.2: Added ATTENDANCE route for the attendance dashboard (6.1)
@@ -25,13 +26,31 @@ export const ROUTES = {
   ANALYTICS:        '/analytics',
   SETTINGS:         '/settings',
   NOT_FOUND:        '*',
+=======
+ */
+
+export const ROUTES = {
+  LOGIN:           '/login',
+  DASHBOARD:       '/',
+  BATCHES:         '/batches',
+  BATCH_DETAIL:    '/batches/:id',
+  STUDENTS:        '/students',
+  MARK_ATTENDANCE: '/attendance/mark',
+  REPORTS:         '/reports',
+  ANALYTICS:       '/analytics',
+  SETTINGS:        '/settings',
+  NOT_FOUND:       '*',
+>>>>>>> 83da42ba2764e152fa78cf9b177f8d106d2a9726
 };
 
 /**
  * Builds a concrete path from a route template by replacing :param tokens.
  * @example buildRoute(ROUTES.BATCH_DETAIL, { id: '123' }) -> '/batches/123'
+<<<<<<< HEAD
  * @example buildRoute(ROUTES.STUDENT_DETAIL, { id: 's21' }) -> '/students/s21'
  * @example buildRoute(ROUTES.ATTENDANCE_SHEET, { batchId: 'b2', date: '2026-06-17' })
+=======
+>>>>>>> 83da42ba2764e152fa78cf9b177f8d106d2a9726
  */
 export const buildRoute = (template, params = {}) =>
   Object.entries(params).reduce(
