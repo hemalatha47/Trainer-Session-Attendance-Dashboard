@@ -222,3 +222,33 @@
     margin: 1.5cm;
   }
 }
+
+/* ── Analytics print styles (Module 8.4) ─────────────────────────────────────
+ * Ensure recharts SVG-based charts render when printing.
+ * Expand analytics grid to single column for print.
+ * ─────────────────────────────────────────────────────────────────────────────*/
+@media print {
+  /* Recharts: force SVG colours to print */
+  .recharts-wrapper svg,
+  .recharts-surface {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  /* Collapse 2-col chart grid to single column for print */
+  .analytics-chart-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Avoid breaking chart cards across pages */
+  .analytics-chart-card {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Ensure risk summary groups don't break mid-group */
+  .analytics-risk-group {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+}
