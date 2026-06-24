@@ -1,8 +1,5 @@
 # Aaro — Trainer Session Attendance Dashboard
 
-**Naan Mudhalvan Internship** — UNM–NM Oracle Internship | 4th Semester  
-Technology: React JSX | Role: Frontend Developer
-
 ---
 
 ## Project Overview
@@ -91,17 +88,3 @@ src/
 ├── data/                Mock data seed files
 └── styles/              Global CSS + Tailwind directives
 ```
-
-## Development Phases
-
-- [x] Phase 1 — Architecture planning & review
-- [x] Phase 2.1 — Project initialization & foundation
-- [ ] Phase 2.2 — Layout system (Sidebar, TopBar, PageWrapper)
-- [ ] Phase 3 — Shared component library
-- [ ] Phase 4 — Batch Management module
-- [ ] Phase 5 — Student Management module
-- [ ] Phase 6 — Attendance module
-- [ ] Phase 7 — Reports module
-- [ ] Phase 8 — Analytics module
-- [ ] Phase 9 — Validation & polish
-- [ ] Phase 10 — Deployment
