@@ -1,2 +1,0 @@
-import{j as e}from"./index-twxXidNN.js";const a=()=>e.jsx("div",{className:"flex flex-col gap-6",children:e.jsxs("header",{children:[e.jsx("h1",{className:"text-xl font-semibold text-textPrimary leading-tight",children:"Dashboard"}),e.jsx("p",{className:"text-sm text-textMuted",children:"Summary metrics and recent activity will appear here."})]})});export{a as default};
-//# sourceMappingURL=index-CKMJ7t6t.js.map
