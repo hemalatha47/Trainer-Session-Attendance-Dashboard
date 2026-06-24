@@ -1,2 +1,0 @@
-import{j as e}from"./index-D5xUM_Ac.js";const a=()=>e.jsx("div",{className:"flex flex-col gap-6",children:e.jsxs("header",{children:[e.jsx("h1",{className:"text-xl font-semibold text-textPrimary leading-tight",children:"Mark Attendance"}),e.jsx("p",{className:"text-sm text-textMuted",children:"Select a batch and date to mark or edit attendance."})]})});export{a as default};
-//# sourceMappingURL=index-cQHNcv54.js.map

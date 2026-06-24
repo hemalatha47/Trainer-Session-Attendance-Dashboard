@@ -1153,7 +1153,6 @@ export const getBatchComparisonData = async (batchIds) => {
   });
 };
 
-<<<<<<< HEAD
 // ── Delete helpers (Module 6.8) ───────────────────────────────────────────────
 
 /**
@@ -1185,8 +1184,6 @@ export const _deleteRecord = (id) => {
   return { deleted: true, record };
 };
 
-=======
->>>>>>> 83da42ba2764e152fa78cf9b177f8d106d2a9726
 // ── Development utility ───────────────────────────────────────────────────────
 
 /**

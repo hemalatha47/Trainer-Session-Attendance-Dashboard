@@ -1,22 +1,20 @@
 /**
-<<<<<<< HEAD
- * ReportsDashboardPage — Module 7.1
- * Reports Dashboard landing page.
+ * ReportsDashboardPage — Module 7.1 + 7.2 + 7.3 + 7.4
+ * Reports Dashboard landing page with full report tables, export, and print.
  *
  * Layout:
- *   Page Header  (title + subtitle + refresh)
- *   Summary Cards (4 KPI metrics)
+ *   Page Header         (title + subtitle + refresh)
+ *   Summary Cards       (4 KPI metrics — dashboard-level)
  *   Report Type Selector (3 cards — Attendance / Batch / Student)
- *   Overview Panels (3 lightweight panels)
+ *   Filter Bar          (date range, batch, student, report type, reset)
+ *   Actions Toolbar     (Export CSV, Print, Refresh)  ← Module 7.4
+ *   Report Tables Section (summary cards + active report table + pagination)
+ *   Overview Panels     (3 lightweight panels)
  *
- * All business logic lives in useReportsDashboard + reportsDashboardService.
- * This page is pure composition — no inline calculations.
- *
- * Blueprint Section 6.7 — Reports page shell.
- * Module scope: shell only. Filters, detail tables, and export belong to 7.2+.
+ * Blueprint Section 6.7
  */
 
-import { useState, useCallback }   from 'react';
+import { useCallback }             from 'react';
 import { motion }                  from 'framer-motion';
 import { FileText, RefreshCw }     from 'lucide-react';
 import { fadeIn, usePrefersReducedMotion } from '@constants/animations';
@@ -27,9 +25,15 @@ import { EmptyState }              from '@components/feedback/EmptyState';
 import { useAppContext }           from '@context/AppContext';
 
 import useReportsDashboard         from '@hooks/useReportsDashboard';
+import useReportFilters            from '@hooks/useReportFilters';
+import useReportsExport            from '@hooks/useReportsExport';
+
 import ReportsSummaryCards         from './components/ReportsSummaryCards';
 import ReportTypeSelector          from './components/ReportTypeSelector';
 import ReportsOverviewPanels       from './components/ReportsOverviewPanels';
+import ReportFiltersBar            from '@components/reports/ReportFiltersBar';
+import ReportTablesSection         from '@components/reports/ReportTablesSection';
+import ReportActionsToolbar        from '@components/reports/ReportActionsToolbar';
 
 // ── Page ──────────────────────────────────────────────────────────────────────
 
@@ -37,6 +41,7 @@ const ReportsDashboardPage = () => {
   const reduced                 = usePrefersReducedMotion();
   const { attendanceThreshold } = useAppContext();
 
+  // ── Dashboard data ────────────────────────────────────────────────────────
   const {
     summary,
     reportTypes,
@@ -47,12 +52,31 @@ const ReportsDashboardPage = () => {
     hasData,
   } = useReportsDashboard();
 
-  // Local UI state: which report type card is selected
-  const [selectedType, setSelectedType] = useState('attendance');
+  // ── Filter state (Module 7.2) ─────────────────────────────────────────────
+  const {
+    filters,
+    errors:        filterErrors,
+    batchOptions,
+    studentOptions,
+    batchLoading,
+    studentLoading,
+    serviceError,
+    updateFilter,
+    updateDateRange,
+    resetFilters,
+  } = useReportFilters();
 
-  const handleSelectType = useCallback((id) => {
-    setSelectedType(id);
-  }, []);
+  // ── Export / print (Module 7.4) ───────────────────────────────────────────
+  const { exporting, printing, exportCSV, printReport } = useReportsExport(
+    filters,
+    attendanceThreshold
+  );
+
+  // ── Sync ReportTypeSelector card with filters.reportType ─────────────────
+  const handleSelectType = useCallback(
+    (id) => updateFilter('reportType', id),
+    [updateFilter]
+  );
 
   // ── Full-page error fallback ───────────────────────────────────────────────
   if (error && !loading) {
@@ -84,9 +108,10 @@ const ReportsDashboardPage = () => {
     <motion.div
       {...safeMotion(reduced, { variants: fadeIn, initial: 'initial', animate: 'animate' })}
       className="flex flex-col gap-6"
+      id="print-report-area"
     >
       {/* ── Page Header ─────────────────────────────────────────────────────── */}
-      <header className="flex items-start justify-between gap-4 flex-wrap">
+      <header className="flex items-start justify-between gap-4 flex-wrap print:hidden">
         <div>
           <h1
             className="text-xl font-semibold text-textPrimary leading-tight flex items-center gap-2"
@@ -118,7 +143,7 @@ const ReportsDashboardPage = () => {
         </Button>
       </header>
 
-      {/* ── KPI Summary Cards ──────────────────────────────────────────────── */}
+      {/* ── KPI Summary Cards (dashboard-level) ───────────────────────────── */}
       <section aria-labelledby="reports-summary-heading">
         <h2 id="reports-summary-heading" className="sr-only">
           Summary metrics
@@ -131,7 +156,7 @@ const ReportsDashboardPage = () => {
       </section>
 
       {/* ── Report Type Selector ───────────────────────────────────────────── */}
-      <section aria-labelledby="report-type-heading">
+      <section aria-labelledby="report-type-heading" className="print:hidden">
         <div className="mb-3">
           <h2
             id="report-type-heading"
@@ -145,14 +170,79 @@ const ReportsDashboardPage = () => {
         </div>
         <ReportTypeSelector
           reportTypes={reportTypes}
-          selectedType={selectedType}
+          selectedType={filters.reportType}
           onSelectType={handleSelectType}
           loading={loading}
         />
       </section>
 
+      {/* ── Filter Bar (Module 7.2) ─────────────────────────────────────────── */}
+      <section aria-labelledby="reports-filters-heading" className="print:hidden">
+        <div className="mb-3">
+          <h2
+            id="reports-filters-heading"
+            className="text-sm font-semibold text-textPrimary"
+          >
+            Filter Reports
+          </h2>
+          <p className="text-xs text-textMuted mt-0.5">
+            Narrow results by date range, batch, or student.
+          </p>
+        </div>
+
+        {serviceError && (
+          <p
+            role="alert"
+            className="mb-2 text-xs text-danger-DEFAULT bg-red-50 border border-red-200 rounded-md px-3 py-2"
+          >
+            {serviceError}
+          </p>
+        )}
+
+        <ReportFiltersBar
+          filters={filters}
+          errors={filterErrors}
+          batchOptions={batchOptions}
+          studentOptions={studentOptions}
+          batchLoading={batchLoading}
+          studentLoading={studentLoading}
+          onUpdateFilter={updateFilter}
+          onUpdateDateRange={updateDateRange}
+          onReset={resetFilters}
+        />
+      </section>
+
+      {/* ── Actions Toolbar (Module 7.4) ───────────────────────────────────── */}
+      <section aria-label="Report actions" className="print:hidden">
+        <ReportActionsToolbar
+          onExportCSV={exportCSV}
+          onPrint={printReport}
+          onRefresh={refresh}
+          exporting={exporting}
+          printing={printing}
+          loading={loading}
+          reportType={filters.reportType}
+        />
+      </section>
+
+      {/* ── Report Tables Section (Module 7.3) ─────────────────────────────── */}
+      <section aria-labelledby="report-tables-heading">
+        <div className="mb-3 print:hidden">
+          <h2
+            id="report-tables-heading"
+            className="text-sm font-semibold text-textPrimary"
+          >
+            Report Data
+          </h2>
+          <p className="text-xs text-textMuted mt-0.5">
+            Detailed records for the selected report type and filters.
+          </p>
+        </div>
+        <ReportTablesSection filters={filters} />
+      </section>
+
       {/* ── Overview Panels ────────────────────────────────────────────────── */}
-      <section aria-labelledby="reports-overview-heading">
+      <section aria-labelledby="reports-overview-heading" className="print:hidden">
         <div className="mb-3">
           <h2
             id="reports-overview-heading"
@@ -174,19 +264,3 @@ const ReportsDashboardPage = () => {
 };
 
 export default ReportsDashboardPage;
-=======
- * ReportsPage — Module 2.3 compile-safety stub.
- * Full batch-wise report table and CSV export arrives in Phase 7.
- */
-
-const ReportsPage = () => (
-  <div>
-    <h2 className="text-lg font-semibold text-primary mb-2">Reports</h2>
-    <p className="text-sm text-textMuted">
-      Batch + date range selector and color-coded report table will appear here.
-    </p>
-  </div>
-);
-
-export default ReportsPage;
->>>>>>> 83da42ba2764e152fa78cf9b177f8d106d2a9726

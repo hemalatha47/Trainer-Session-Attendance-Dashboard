@@ -2,15 +2,9 @@
  * MetricCard.jsx
  * Large KPI metric card for Analytics/Dashboard (Module 3.4, Task 5).
  *
-<<<<<<< HEAD
  * Typography: Part 2.1 — kpiValue token (text-2xl font-bold).
  *   Consolidated from text-3xl font-bold → text-2xl font-bold.
  *   Unit: text-lg font-semibold → text-base font-medium (kpiUnit token).
-=======
- * Designed for big-number displays: attendance %, completion rate, totals.
- * Includes a mini chart slot (pass a Recharts component or placeholder).
- * Integrates TrendIndicator and StatusBadge.
->>>>>>> 83da42ba2764e152fa78cf9b177f8d106d2a9726
  */
 
 import { motion } from 'framer-motion';
@@ -22,21 +16,12 @@ import { TrendIndicator } from '../TrendIndicator';
 /**
  * @param {object}  props
  * @param {string}  props.label
-<<<<<<< HEAD
  * @param {string|number} props.value
  * @param {string}  [props.unit]
  * @param {string}  [props.comparisonLabel]
  * @param {number}  [props.trend]
  * @param {string}  [props.trendLabel]
  * @param {React.ReactNode} [props.chart]
-=======
- * @param {string|number} props.value         — main KPI value, e.g. "84.3%"
- * @param {string}  [props.unit]              — appended to value, e.g. "%"
- * @param {string}  [props.comparisonLabel]   — e.g. "Batch avg: 78%"
- * @param {number}  [props.trend]
- * @param {string}  [props.trendLabel]
- * @param {React.ReactNode} [props.chart]     — mini chart element (Recharts / SVG)
->>>>>>> 83da42ba2764e152fa78cf9b177f8d106d2a9726
  * @param {React.ReactNode} [props.icon]
  * @param {boolean} [props.loading=false]
  * @param {string}  [props.className]
@@ -64,11 +49,7 @@ const MetricCard = ({
       )}
       {...safeMotion(reduced, { variants: cardHover, initial: 'rest', whileHover: 'hover' })}
     >
-<<<<<<< HEAD
       {/* Label row — cardTitle token */}
-=======
-      {/* Label row */}
->>>>>>> 83da42ba2764e152fa78cf9b177f8d106d2a9726
       <div className="flex items-center justify-between gap-2">
         <p className="text-sm font-medium text-textMuted">{label}</p>
         {icon && (
@@ -76,7 +57,6 @@ const MetricCard = ({
         )}
       </div>
 
-<<<<<<< HEAD
       {/* Value — kpiValue token: text-2xl font-bold */}
       <div className="flex items-end gap-1">
         <p className="text-2xl font-bold text-textPrimary tabular-nums leading-none">
@@ -84,15 +64,6 @@ const MetricCard = ({
         </p>
         {unit && (
           <span className="text-base font-medium text-textMuted mb-0.5">{unit}</span>
-=======
-      {/* Value */}
-      <div className="flex items-end gap-1">
-        <p className="text-3xl font-bold text-textPrimary tabular-nums leading-none">
-          {value ?? '—'}
-        </p>
-        {unit && (
-          <span className="text-lg font-semibold text-textMuted mb-0.5">{unit}</span>
->>>>>>> 83da42ba2764e152fa78cf9b177f8d106d2a9726
         )}
       </div>
 

@@ -1,6 +1,5 @@
 /**
  * src/components/attendance/index.js
-<<<<<<< HEAD
  * Barrel export for the Attendance Component Library.
  *
  * Module 6.5 additions:
@@ -8,12 +7,6 @@
  *
  * Import from here in pages/hooks:
  *   import { AttendanceStatusChip, AttendanceSaveBar } from '@components/attendance';
-=======
- * Barrel export for the entire Module 3.5 Attendance Component Library.
- *
- * Import from here in pages/hooks:
- *   import { AttendanceStatusChip, AttendanceToggle } from '@components/attendance';
->>>>>>> 83da42ba2764e152fa78cf9b177f8d106d2a9726
  */
 
 // ── Status display ─────────────────────────────────────────────────────────────
@@ -23,7 +16,6 @@ export { AttendanceLegend }        from './AttendanceLegend';
 // ── Input / marking ───────────────────────────────────────────────────────────
 export { AttendanceToggle }        from './AttendanceToggle';
 export { AttendanceStatusSelector } from './AttendanceStatusSelector';
-<<<<<<< HEAD
 
 // ── Bulk toolbars (Module 6.4) ────────────────────────────────────────────────
 export { BulkAttendanceToolbar }   from './BulkAttendanceToolbar';     // backward-compat
@@ -32,9 +24,6 @@ export { SelectedActionToolbar }   from './SelectedActionToolbar';      // Task 
 
 // ── Save bar (Module 6.5) ─────────────────────────────────────────────────────
 export { AttendanceSaveBar }       from './AttendanceSaveBar';          // Task 9
-=======
-export { BulkAttendanceToolbar }   from './BulkAttendanceToolbar';
->>>>>>> 83da42ba2764e152fa78cf9b177f8d106d2a9726
 
 // ── Composite rows / sheet ────────────────────────────────────────────────────
 export { AttendanceRow }           from './AttendanceRow';
@@ -59,12 +48,9 @@ export {
 // ── Calendar ──────────────────────────────────────────────────────────────────
 export { AttendanceCalendar }      from './AttendanceCalendar';
 
-<<<<<<< HEAD
 // ── Charts ────────────────────────────────────────────────────────────────────
 export { StudentAttendanceChart }  from './StudentAttendanceChart';
 
-=======
->>>>>>> 83da42ba2764e152fa78cf9b177f8d106d2a9726
 // ── Empty states ──────────────────────────────────────────────────────────────
 export {
   NoAttendanceData,

@@ -1,0 +1,2 @@
+const e={root:"flex flex-col gap-6",header:"flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between",headerLeft:"flex flex-col gap-1",headerRight:"flex items-center gap-2 mt-2 sm:mt-0 shrink-0",titleRow:"flex items-center gap-2",title:"text-xl font-semibold text-textPrimary",subtitle:"text-sm text-textMuted"},t={padded:"bg-white rounded-md border border-border shadow-card p-5"};export{t as C,e as P};
+//# sourceMappingURL=uiStandards-BPrFhGNQ.js.map

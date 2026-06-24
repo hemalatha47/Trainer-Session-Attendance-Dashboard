@@ -1,2 +1,0 @@
-import{j as e}from"./index-D5xUM_Ac.js";const a=()=>e.jsx("div",{className:"flex flex-col gap-6",children:e.jsxs("header",{children:[e.jsx("h1",{className:"text-xl font-semibold text-textPrimary leading-tight",children:"Attendance Reports"}),e.jsx("p",{className:"text-sm text-textMuted",children:"Select a batch and date range to generate a report."})]})});export{a as default};
-//# sourceMappingURL=index-b6ekySyK.js.map

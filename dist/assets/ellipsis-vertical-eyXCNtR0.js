@@ -1,2 +1,0 @@
-import{c}from"./index-D5xUM_Ac.js";const e=[["path",{d:"M21 12c.552 0 1.005-.449.95-.998a10 10 0 0 0-8.953-8.951c-.55-.055-.998.398-.998.95v8a1 1 0 0 0 1 1z",key:"pzmjnu"}],["path",{d:"M21.21 15.89A10 10 0 1 1 8 2.83",key:"k2fpak"}]],a=c("chart-pie",e);const i=[["circle",{cx:"12",cy:"12",r:"1",key:"41hilf"}],["circle",{cx:"12",cy:"5",r:"1",key:"gxeob9"}],["circle",{cx:"12",cy:"19",r:"1",key:"lyex9k"}]],o=c("ellipsis-vertical",i);export{a as C,o as E};
-//# sourceMappingURL=ellipsis-vertical-eyXCNtR0.js.map

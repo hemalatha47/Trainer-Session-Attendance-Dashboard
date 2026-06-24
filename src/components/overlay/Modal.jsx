@@ -124,11 +124,7 @@ const Modal = ({
           {title ? (
             <h2
               id={titleId}
-<<<<<<< HEAD
               className="text-base font-semibold text-textPrimary leading-snug"
-=======
-              className="text-base font-semibold text-secondary-900 leading-snug"
->>>>>>> 83da42ba2764e152fa78cf9b177f8d106d2a9726
             >
               {title}
             </h2>

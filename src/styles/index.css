@@ -132,3 +132,93 @@
     z-index: 0;
   }
 }
+
+/* ─────────────────────────────────────────────────────────────────────────────
+ * PRINT STYLES — Module 7.4
+ * Applied only when window.print() is triggered or Ctrl+P is pressed.
+ *
+ * Rules:
+ *  - Hide sidebar, topbar, toolbar, and nav buttons.
+ *  - Show only the .print-report-area container.
+ *  - Force white background, black text, no shadows.
+ *  - Preserve table borders for readability.
+ * ─────────────────────────────────────────────────────────────────────────────*/
+@media print {
+  /* Hide structural chrome */
+  aside,
+  nav,
+  header,
+  [data-sidebar],
+  [data-topbar],
+  .print\:hidden {
+    display: none !important;
+  }
+
+  /* Page reset */
+  *,
+  *::before,
+  *::after {
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  html,
+  body {
+    background: #fff !important;
+    color: #000 !important;
+    font-size: 11pt;
+  }
+
+  /* Expand content to full width (sidebar gone) */
+  #root,
+  main,
+  .page-wrapper-content {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0.5cm !important;
+  }
+
+  /* Print-only header injected by ReportPrintHeader */
+  .print-report-header {
+    display: block !important;
+    margin-bottom: 0.5cm;
+  }
+
+  /* Table print rules */
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 9pt;
+  }
+
+  th,
+  td {
+    border: 1px solid #aaa !important;
+    padding: 4px 6px;
+  }
+
+  thead {
+    background: #f0f0f0 !important;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  /* Avoid page breaks inside rows */
+  tr {
+    page-break-inside: avoid;
+  }
+
+  /* Force colour badges to print */
+  .badge-present,
+  .badge-absent,
+  .badge-warning {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  /* Page margins */
+  @page {
+    margin: 1.5cm;
+  }
+}

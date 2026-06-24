@@ -120,11 +120,7 @@ const BatchHeaderSection = ({ batch, loading, onEdit }) => {
         {/* Left — name + code + status */}
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-2 mb-1">
-<<<<<<< HEAD
             <h1 className="text-xl font-semibold text-textPrimary leading-tight truncate">
-=======
-            <h1 className="text-xl sm:text-2xl font-bold text-textPrimary leading-tight truncate">
->>>>>>> 83da42ba2764e152fa78cf9b177f8d106d2a9726
               {batch.batchName}
             </h1>
             <Badge variant={statusVariant} size="sm">

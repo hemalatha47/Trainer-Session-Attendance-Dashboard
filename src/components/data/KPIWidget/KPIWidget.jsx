@@ -5,7 +5,6 @@
  * Richer than StatCard — designed for Analytics/Dashboard page hero metrics.
  * Includes: large value, icon, trend, comparison text, status badge, loading state.
  *
-<<<<<<< HEAD
  * Typography: Part 2.1 — kpiValue token (text-2xl font-bold).
  *   Consolidated from text-3xl font-extrabold → text-2xl font-bold.
  *   Rationale: text-3xl/extrabold created visual dominance inconsistent with
@@ -20,16 +19,6 @@
  * @param {number}  [props.trend]
  * @param {string}  [props.trendLabel]
  * @param {string}  [props.comparisonValue]
-=======
- * @param {object}  props
- * @param {string}  props.title
- * @param {string|number} props.value
- * @param {string}  [props.unit]               — appended unit, e.g. "%"
- * @param {React.ReactNode} [props.icon]
- * @param {number}  [props.trend]
- * @param {string}  [props.trendLabel]
- * @param {string}  [props.comparisonValue]    — e.g. "Batch avg: 78%"
->>>>>>> 83da42ba2764e152fa78cf9b177f8d106d2a9726
  * @param {'default'|'success'|'warning'|'danger'} [props.status='default']
  * @param {boolean} [props.loading=false]
  * @param {function} [props.onClick]
@@ -93,7 +82,6 @@ const KPIWidget = ({
         )}
       </div>
 
-<<<<<<< HEAD
       {/* Main value — kpiValue token: text-2xl font-bold */}
       <div className="flex items-end gap-1.5 pl-2">
         <p className="text-2xl font-bold text-textPrimary tabular-nums leading-none">
@@ -101,15 +89,6 @@ const KPIWidget = ({
         </p>
         {unit && (
           <span className="text-base font-medium text-textMuted mb-0.5">{unit}</span>
-=======
-      {/* Main value */}
-      <div className="flex items-end gap-1.5 pl-2">
-        <p className="text-3xl font-extrabold text-textPrimary tabular-nums leading-none">
-          {value ?? '—'}
-        </p>
-        {unit && (
-          <span className="text-lg font-bold text-textMuted mb-0.5">{unit}</span>
->>>>>>> 83da42ba2764e152fa78cf9b177f8d106d2a9726
         )}
       </div>
 

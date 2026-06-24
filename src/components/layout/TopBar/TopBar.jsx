@@ -217,11 +217,7 @@ const TopBar = () => {
 
       {/* Title + breadcrumb — driven entirely by routeConfig */}
       <div className="flex-1 min-w-0">
-<<<<<<< HEAD
         <h1 className="text-base font-semibold text-textPrimary leading-tight truncate">
-=======
-        <h1 className="text-base font-semibold text-primary leading-tight truncate">
->>>>>>> 83da42ba2764e152fa78cf9b177f8d106d2a9726
           {routeMeta?.title || 'Dashboard'}
         </h1>
         <BreadcrumbBar crumbs={crumbs} />
